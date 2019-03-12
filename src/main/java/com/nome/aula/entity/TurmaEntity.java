@@ -1,87 +1,81 @@
 package com.nome.aula.entity;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-public class CursoEntity implements Serializable{
+public class TurmaEntity implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	
-	private String nome;
-	private String nivel;
-	private String turno;
+	private String descricao;
 	
+	private	Integer serieSemestre;
 	
-	@OneToMany(mappedBy="curso")
-	private List<TurmaEntity> turmas = new ArrayList<>();
-	
-	public CursoEntity(Integer id, String nome, String nivel, String turno) {
+	@JsonIgnore
+	@ManyToOne
+	@JoinColumn(name="curso_id")
+	private CursoEntity curso;
+		
+	public TurmaEntity() {
 		super();
-		this.id = id;
-		this.nome = nome;
-		this.nivel = nivel;
-		this.turno = turno;
 	}
 
-	public CursoEntity() {
+	public TurmaEntity(Integer id, String descricao, Integer serieSemestre, CursoEntity curso) {
 		super();
+		this.id = id;
+		this.descricao = descricao;
+		this.serieSemestre = serieSemestre;
+		this.curso = curso;
 	}
+	
 
 	public Integer getId() {
 		return id;
 	}
 
+	
 	public void setId(Integer id) {
 		this.id = id;
 	}
 
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
-	public String getNivel() {
-		return nivel;
-	}
-
-	public void setNivel(String nivel) {
-		this.nivel = nivel;
-	}
-
-	public String getTurno() {
-		return turno;
-	}
-
-	public void setTurno(String turno) {
-		this.turno = turno;
-	}
 	
+	public String getDescricao() {
+		return descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+
+	public Integer getSerieSemestre() {
+		return serieSemestre;
+	}
+
+	public void setSerieSemestre(Integer serieSemestre) {
+		this.serieSemestre = serieSemestre;
+	}
+
+	public CursoEntity getCurso() {
+		return curso;
+	}
+
+	public void setCurso(CursoEntity curso) {
+		this.curso = curso;
+	}
+
 	
-
-	public List<TurmaEntity> getTurmas() {
-		return turmas;
-	}
-
-	public void setTurmas(List<TurmaEntity> turmas) {
-		this.turmas = turmas;
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -90,6 +84,7 @@ public class CursoEntity implements Serializable{
 		return result;
 	}
 
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -98,7 +93,7 @@ public class CursoEntity implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		CursoEntity other = (CursoEntity) obj;
+		TurmaEntity other = (TurmaEntity) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -108,7 +103,5 @@ public class CursoEntity implements Serializable{
 	}
 	
 	
-	
-	
-	
+
 }
