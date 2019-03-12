@@ -2,8 +2,6 @@ package com.nome.aula;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -42,8 +40,6 @@ public class DemoApplication implements CommandLineRunner{
 		cursoDAO.saveAll(Arrays.asList(curso1, curso2));	
 		turmaDAO.saveAll(Arrays.asList(turma1, turma2, turma3));		
 			
-		
-		
 		
 	}
 
