@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.nome.aula.dao.CursoDAO;
 import com.nome.aula.entity.CursoEntity;
-import com.nome.aula.exceptions.NaoEncontradoException;
+import com.nome.aula.exceptions.ObjNaoEncontradoException;
 
 import javassist.NotFoundException;
 
@@ -20,7 +20,7 @@ public class CursoService {
 	
 	public CursoEntity buscar(Integer id) {
 		Optional<CursoEntity> curso = dao.findById(id);
-		return curso.orElseThrow(()-> new NaoEncontradoException("Objeto não encontrado"));
+		return curso.orElseThrow(()-> new ObjNaoEncontradoException("Objeto não encontrado"));
 	}
 	
 	public List<CursoEntity> buscar(){

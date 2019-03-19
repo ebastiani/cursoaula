@@ -12,8 +12,10 @@ import org.springframework.web.client.HttpServerErrorException;
 @ControllerAdvice
 public class ErroHandler {
 	
-	@ExceptionHandler(NaoEncontradoException.class)
-	public ResponseEntity<ErroResource> objectNotFound(NaoEncontradoException e, HttpServletRequest request){
+	@ExceptionHandler(ObjNaoEncontradoException.class)
+	public ResponseEntity<ErroResource> objectNotFound(
+			ObjNaoEncontradoException e, HttpServletRequest request)
+	{
 		ErroResource erro = new ErroResource(HttpStatus.NOT_FOUND.value(), e.getMessage());
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(erro);
 	}

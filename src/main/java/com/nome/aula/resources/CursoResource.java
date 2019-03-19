@@ -42,10 +42,7 @@ public class CursoResource {
 	
 	@RequestMapping(method=RequestMethod.GET, value="/{id}")
 	public ResponseEntity<CursoEntity> buscar(@PathVariable Integer id){
-		CursoEntity curso = service.buscar(id);
-		if(curso == null) {
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
-		}
+		CursoEntity curso = service.buscar(id);		
 		return ResponseEntity.ok(curso);
 	}	
 	

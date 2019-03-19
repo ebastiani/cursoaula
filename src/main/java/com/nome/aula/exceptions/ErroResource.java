@@ -35,6 +35,6 @@ public class ErroResource implements Serializable{
 		this.mensagem = mensagem;
 	}
 	
-	
-
 }
+
+
