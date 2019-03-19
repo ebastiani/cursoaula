@@ -38,8 +38,7 @@ public class DemoApplication implements CommandLineRunner{
 		curso2.getTurmas().addAll(Arrays.asList(turma3));
 		
 		cursoDAO.saveAll(Arrays.asList(curso1, curso2));	
-		turmaDAO.saveAll(Arrays.asList(turma1, turma2, turma3));		
-			
+		turmaDAO.saveAll(Arrays.asList(turma1, turma2, turma3));				
 		
 	}
 

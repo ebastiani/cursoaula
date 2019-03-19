@@ -26,8 +26,7 @@ public class AlunoResource {
 	@RequestMapping(method=RequestMethod.GET)
 	public List<AlunoEntity> listar() {	
 		List<AlunoEntity> lista = service.buscar();
-		return lista;		
-		
+		return lista;
 	}	
 	
 	

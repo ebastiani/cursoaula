@@ -24,7 +24,7 @@ public class CursoEntity implements Serializable{
 	private String nivel;
 	private String turno;
 	
-	
+
 	@OneToMany(mappedBy="curso")
 	private List<TurmaEntity> turmas = new ArrayList<>();
 	

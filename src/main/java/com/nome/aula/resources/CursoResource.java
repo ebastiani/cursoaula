@@ -22,21 +22,10 @@ public class CursoResource {
 	CursoService service;
 
 	@RequestMapping(method=RequestMethod.GET)
-	public List<CursoEntity> listar() {
-		/*CursoEntity c1 = new CursoEntity(1, "Sistemas para Internet", "Superior", "noturno");
-		CursoEntity c2 = new CursoEntity(2, "Processos Químicos", "Superior", "diurno");
-		CursoEntity c3 = new CursoEntity(3, "Biologia", "Superior", "diurno");
-		
-		List<CursoEntity> listaCursos = new ArrayList<>();
-		listaCursos.add(c1);
-		listaCursos.add(c2);
-		listaCursos.add(c3);
-		*/
+	public List<CursoEntity> listar() {	
 		List<CursoEntity> listaCursos = service.buscar();
-		return listaCursos;		
-		
+		return listaCursos;				
 	}	
-	
 	
 	@RequestMapping(method=RequestMethod.GET, value="/{id}")
 	public ResponseEntity<CursoEntity> buscar(@PathVariable Integer id){
@@ -45,6 +34,5 @@ public class CursoResource {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
 		}
 		return ResponseEntity.ok(curso);
-	}
-	
+	}	
 }
