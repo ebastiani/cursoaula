@@ -26,5 +26,10 @@ public class CursoService {
 	public List<CursoEntity> buscar(){
 		 return dao.findAll();
 	}
+
+	public CursoEntity salvar(CursoEntity obj) {
+		obj.setId(null);
+		return dao.save(obj);
+	}
 	
 }
