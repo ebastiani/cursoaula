@@ -3,23 +3,24 @@ package com.nome.aula.DTO;
 import java.io.Serializable;
 
 import com.nome.aula.entity.CursoEntity;
+import com.nome.aula.entity.ServidorEntity;
 
-public class CursoDTO implements Serializable{
+public class ServidorDTO implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	private Integer id;
 	
 	private String nome;
-	private String nivel;
-	private String turno;
+	private String email;
+	private String senha;
 	
-	public CursoDTO() {}
+	public ServidorDTO() {}
 	
-	public CursoDTO(CursoEntity obj) {
+	public ServidorDTO(ServidorEntity obj) {
 		this.id = obj.getId();
 		this.nome = obj.getNome();
-		this.turno = obj.getTurno();
-		this.nivel = obj.getNivel();
+		this.email = obj.getEmail();
+		this.senha = obj.getSenha();
 	}
 
 	//getters e setters
@@ -40,21 +41,23 @@ public class CursoDTO implements Serializable{
 		this.nome = nome;
 	}
 
-	public String getNivel() {
-		return nivel;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setNivel(String nivel) {
-		this.nivel = nivel;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
-	public String getTurno() {
-		return turno;
+	public String getSenha() {
+		return senha;
 	}
 
-	public void setTurno(String turno) {
-		this.turno = turno;
+	public void setSenha(String senha) {
+		this.senha = senha;
 	}
+
+	
 	
 	
 }
