@@ -2,6 +2,10 @@ package com.nome.aula.DTO;
 
 import java.io.Serializable;
 
+import javax.validation.constraints.NotEmpty;
+
+import org.hibernate.validator.constraints.Length;
+
 import com.nome.aula.entity.CursoEntity;
 
 public class CursoDTO implements Serializable{
@@ -9,6 +13,8 @@ public class CursoDTO implements Serializable{
 	
 	private Integer id;
 	
+	@NotEmpty(message="Preenchimento obrigatório")
+	@Length(min=1, max=100, message="O nome deve conter entre 1 e 100 caracteres")
 	private String nome;
 	private String nivel;
 	private String turno;

@@ -4,6 +4,8 @@ import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -26,20 +28,14 @@ public class CursoResource {
 	
 	@Autowired
 	CursoService service;
-
-	/*@RequestMapping(method=RequestMethod.GET)
-	public List<CursoEntity> listar() {	
-		List<CursoEntity> listaCursos = service.buscar();
-		return listaCursos;				
-	}*/
+	
 	
 	@RequestMapping(method=RequestMethod.GET)
 	public List<CursoDTO> listardto() {	
 		List<CursoEntity> listaCursos = service.buscar();
 		List<CursoDTO> listaDTO = listaCursos.stream().map(obj -> new CursoDTO(obj)).collect(Collectors.toList());
 		return listaDTO;				
-	}
-	
+	}	
 	
 	@RequestMapping(method=RequestMethod.GET, value="/{id}")
 	public ResponseEntity<CursoEntity> buscar(@PathVariable Integer id){
@@ -48,17 +44,25 @@ public class CursoResource {
 	}	
 	
 	@RequestMapping(method=RequestMethod.POST)
-	public ResponseEntity<Void> salvar(@RequestBody CursoEntity obj){			
+	public ResponseEntity<Void> salvar(@Valid @RequestBody CursoDTO objDTO){
+		
+		CursoEntity obj = new CursoEntity(null, objDTO.getNome(), objDTO.getNivel(), objDTO.getTurno());
+		
 		obj = service.salvar(obj);		
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
 				.path("/{id}").buildAndExpand(obj.getId()).toUri();
+		
 		return ResponseEntity.created(uri).build();
 	}
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.PUT)
-	public ResponseEntity<Void> atualizar(@RequestBody CursoEntity obj, @PathVariable Integer id){		
-		obj.setId(id);
-		obj = service.atualizar(obj);			
+	public ResponseEntity<Void> atualizar(
+			@Valid @RequestBody CursoDTO objDTO, 
+			@PathVariable Integer id){	
+		
+		CursoEntity obj = new CursoEntity(objDTO.getId(), objDTO.getNome(), objDTO.getNivel(), objDTO.getTurno());		
+		obj.setId(id);		
+		obj = service.atualizar(obj);				
 		return ResponseEntity.noContent().build();
 	}
 	

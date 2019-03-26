@@ -47,8 +47,17 @@ public class CursoService {
 		return dao.save(obj);
 	}
 	
-	public Page<CursoEntity> buscarPorPagina(Integer pagina, Integer qtdLinhas, String orderBy, String dir){		
-		PageRequest pageRequest = PageRequest.of(pagina, qtdLinhas, Direction.valueOf(dir), orderBy);
+	public Page<CursoEntity> buscarPorPagina(
+			Integer pagina, 
+			Integer qtdLinhas, 
+			String orderBy, 
+			String dir){		
+		PageRequest pageRequest = PageRequest.of(
+				pagina, 
+				qtdLinhas, 
+				Direction.valueOf(dir), 
+				orderBy);
+		
 		return dao.findAll(pageRequest);
 	}
 	
