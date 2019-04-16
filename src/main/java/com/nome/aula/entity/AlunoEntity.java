@@ -42,6 +42,10 @@ public class AlunoEntity implements Serializable{
 		inverseJoinColumns = @JoinColumn (name = "necessidade_id")
 	)
 	private List<NecessidadeEntity> necessidades = new ArrayList<>();
+	
+	
+	@OneToMany(mappedBy="aluno")
+	private List<ParecerEntity> pareceres = new ArrayList<>();
 
 	public AlunoEntity() {
 		super();
@@ -112,6 +116,17 @@ public class AlunoEntity implements Serializable{
 
 	public void setNecessidades(List<NecessidadeEntity> necessidades) {
 		this.necessidades = necessidades;
+	}
+	
+	
+	
+
+	public List<ParecerEntity> getPareceres() {
+		return pareceres;
+	}
+
+	public void setPareceres(List<ParecerEntity> pareceres) {
+		this.pareceres = pareceres;
 	}
 
 	@Override

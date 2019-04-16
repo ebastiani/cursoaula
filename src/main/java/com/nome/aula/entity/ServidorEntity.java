@@ -1,13 +1,14 @@
 package com.nome.aula.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
-import org.apache.tomcat.util.security.MD5Encoder;
+import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -20,10 +21,14 @@ public class ServidorEntity implements Serializable {
 	private Integer id;
 
 	private String nome;
+	
 	private String email;
 	
 	@JsonIgnore
 	private String senha;
+		
+	@OneToMany(mappedBy="servidor")
+	private List<ParecerEntity> pareceres = new ArrayList<>();
 
 	public ServidorEntity() {
 		super();
@@ -36,6 +41,7 @@ public class ServidorEntity implements Serializable {
 		this.email = email;
 		this.senha = senha;
 	}
+		
 
 	public Integer getId() {
 		return id;
@@ -67,6 +73,16 @@ public class ServidorEntity implements Serializable {
 
 	public void setSenha(String senha) {
 		this.senha = senha;
+	}
+	
+	
+
+	public List<ParecerEntity> getPareceres() {
+		return pareceres;
+	}
+
+	public void setPareceres(List<ParecerEntity> pareceres) {
+		this.pareceres = pareceres;
 	}
 
 	@Override

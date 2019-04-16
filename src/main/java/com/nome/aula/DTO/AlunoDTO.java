@@ -2,11 +2,7 @@ package com.nome.aula.DTO;
 
 import java.io.Serializable;
 
-import javax.validation.constraints.Email;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.nome.aula.entity.AlunoEntity;
-import com.nome.aula.entity.ServidorEntity;
 
 public class AlunoDTO implements Serializable {
 	private static final long serialVersionUID = 1L;

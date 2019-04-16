@@ -1,7 +1,8 @@
 package com.nome.aula;
 
-import java.util.ArrayList;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -10,11 +11,13 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import com.nome.aula.dao.AlunoDAO;
 import com.nome.aula.dao.CursoDAO;
 import com.nome.aula.dao.NecessidadeDAO;
+import com.nome.aula.dao.ParecerDAO;
 import com.nome.aula.dao.ServidorDAO;
 import com.nome.aula.dao.TurmaDao;
 import com.nome.aula.entity.AlunoEntity;
 import com.nome.aula.entity.CursoEntity;
 import com.nome.aula.entity.NecessidadeEntity;
+import com.nome.aula.entity.ParecerEntity;
 import com.nome.aula.entity.ServidorEntity;
 import com.nome.aula.entity.TurmaEntity;
 
@@ -37,6 +40,10 @@ public class DemoApplication implements CommandLineRunner{
 	
 	@Autowired
 	private AlunoDAO alunoDAO;
+	
+	@Autowired
+	private ParecerDAO parecerDAO;
+
 
 	public static void main(String[] args) {
 		SpringApplication.run(DemoApplication.class, args);
@@ -67,6 +74,10 @@ public class DemoApplication implements CommandLineRunner{
 		
 		alunoEntity.getNecessidades().add(necessidadeEntity);
 		
+		SimpleDateFormat  data = new  SimpleDateFormat("dd/MM/yyyy HH:mm");
+		
+		ParecerEntity parecerEntity = new ParecerEntity(null, "okokook", "anexo", data.parse("16/04/2019 6:20"), servidor, alunoEntity);
+		
 		//16/04/2019
 		cursoDAO.saveAll(Arrays.asList(curso1, curso2));	
 		turmaDAO.saveAll(Arrays.asList(turma1, turma2, turma3));	
@@ -76,7 +87,7 @@ public class DemoApplication implements CommandLineRunner{
 		
 		servidorDAO.save(servidor);
 		
-		
+		parecerDAO.save(parecerEntity);
 		
 		
 		
