@@ -34,20 +34,26 @@ public class AlunoEntity implements Serializable{
 		inverseJoinColumns = @JoinColumn (name = "turma_id")
 	)
 	private List<TurmaEntity> turmas = new ArrayList<>();
+	
+	@JsonIgnore
+	@ManyToMany
+	@JoinTable(name = "necessidades_alunos", 
+		joinColumns = @JoinColumn(name = "aluno_id"),
+		inverseJoinColumns = @JoinColumn (name = "necessidade_id")
+	)
+	private List<NecessidadeEntity> necessidades = new ArrayList<>();
 
 	public AlunoEntity() {
 		super();
 	}
 
-	public AlunoEntity(Integer id, String nome, String telefone, String matricula, String email,
-			List<TurmaEntity> turmas) {
+	public AlunoEntity(Integer id, String nome, String telefone, String matricula, String email) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.telefone = telefone;
 		this.matricula = matricula;
 		this.email = email;
-		this.turmas = turmas;
 	}
 
 	public Integer getId() {
@@ -96,6 +102,16 @@ public class AlunoEntity implements Serializable{
 
 	public void setTurmas(List<TurmaEntity> turmas) {
 		this.turmas = turmas;
+	}
+	
+	
+
+	public List<NecessidadeEntity> getNecessidades() {
+		return necessidades;
+	}
+
+	public void setNecessidades(List<NecessidadeEntity> necessidades) {
+		this.necessidades = necessidades;
 	}
 
 	@Override

@@ -46,7 +46,12 @@ public class CursoResource {
 	@RequestMapping(method=RequestMethod.POST)
 	public ResponseEntity<Void> salvar(@Valid @RequestBody CursoDTO objDTO){
 		
-		CursoEntity obj = new CursoEntity(null, objDTO.getNome(), objDTO.getNivel(), objDTO.getTurno());
+		CursoEntity obj = new CursoEntity(
+				null, 
+				objDTO.getNome(), 
+				objDTO.getNivel(), 
+				objDTO.getTurno()
+		);
 		
 		obj = service.salvar(obj);		
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
@@ -60,7 +65,12 @@ public class CursoResource {
 			@Valid @RequestBody CursoDTO objDTO, 
 			@PathVariable Integer id){	
 		
-		CursoEntity obj = new CursoEntity(objDTO.getId(), objDTO.getNome(), objDTO.getNivel(), objDTO.getTurno());		
+		CursoEntity obj = new CursoEntity(
+				objDTO.getId(), 
+				objDTO.getNome(), 
+				objDTO.getNivel(), 
+				objDTO.getTurno()
+		);		
 		obj.setId(id);		
 		obj = service.atualizar(obj);				
 		return ResponseEntity.noContent().build();
@@ -80,6 +90,12 @@ public class CursoResource {
 		
 		return ResponseEntity.ok().body(listaDTO);				
 	}	
+	
+	@RequestMapping(method=RequestMethod.DELETE, value="/{id}")
+	public ResponseEntity<Void> delete (@PathVariable Integer id){
+		service.apagar(id);
+		return ResponseEntity.noContent().build();
+	}
 	
 	
 }

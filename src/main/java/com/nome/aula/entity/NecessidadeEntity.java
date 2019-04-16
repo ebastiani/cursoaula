@@ -1,40 +1,50 @@
 package com.nome.aula.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
+import javax.persistence.ManyToMany;
 
 import org.apache.tomcat.util.security.MD5Encoder;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-public class ServidorEntity implements Serializable {
+public class NecessidadeEntity implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
-	private String nome;
-	private String email;
+	private String descricao;
+		
 	
-	@JsonIgnore
-	private String senha;
-
-	public ServidorEntity() {
+	@ManyToMany(mappedBy = "necessidades")
+	private List<AlunoEntity> alunos = new ArrayList<>();
+		
+	public NecessidadeEntity() {
 		super();
 	}
 
-	public ServidorEntity(Integer id, String nome, String email, String senha) {
+	public NecessidadeEntity(Integer id, String descricao) {
 		super();
 		this.id = id;
-		this.nome = nome;
-		this.email = email;
-		this.senha = senha;
+		this.descricao = descricao;		
+	}
+	
+	
+
+	public NecessidadeEntity(Integer id, String descricao, String observacao) {
+		super();
+		this.id = id;
+		this.descricao = descricao;		
 	}
 
 	public Integer getId() {
@@ -44,29 +54,24 @@ public class ServidorEntity implements Serializable {
 	public void setId(Integer id) {
 		this.id = id;
 	}
+	
 
-	public String getNome() {
-		return nome;
+	public String getDescricao() {
+		return descricao;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+	
+	
+
+	public List<AlunoEntity> getAlunos() {
+		return alunos;
 	}
 
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public String getSenha() {
-		return senha;
-	}
-
-	public void setSenha(String senha) {
-		this.senha = senha;
+	public void setAlunos(List<AlunoEntity> alunos) {
+		this.alunos = alunos;
 	}
 
 	@Override
@@ -85,7 +90,7 @@ public class ServidorEntity implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		ServidorEntity other = (ServidorEntity) obj;
+		NecessidadeEntity other = (NecessidadeEntity) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;

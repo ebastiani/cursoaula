@@ -18,43 +18,42 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.nome.aula.DTO.CursoDTO;
-import com.nome.aula.DTO.AlunoDTO;
+import com.nome.aula.DTO.NecessidadeDTO;
+import com.nome.aula.DTO.NecessidadeDetalheDTO;
 import com.nome.aula.entity.CursoEntity;
-import com.nome.aula.entity.AlunoEntity;
-import com.nome.aula.service.AlunoService;
+import com.nome.aula.entity.NecessidadeEntity;
+import com.nome.aula.service.NecessidadeService;
 
 @RestController
-@RequestMapping(value="/alunos")
-public class AlunoResource {
+@RequestMapping(value="/necessidades")
+public class NecessidadeResource {
 	
 	@Autowired
-	AlunoService service;
+	NecessidadeService service;
 	
 	@RequestMapping(method=RequestMethod.GET)
-	public List<AlunoDTO> buscar() {	
-		List<AlunoEntity> listaAlunos = service.buscar();
-		List<AlunoDTO> listaDTO = listaAlunos.stream().map(
-				obj -> new AlunoDTO(obj)).collect(Collectors.toList()
+	public List<NecessidadeDTO> buscar() {	
+		List<NecessidadeEntity> listaNecessidades = service.buscar();
+		List<NecessidadeDTO> listaDTO = listaNecessidades.stream().map(
+				obj -> new NecessidadeDTO(obj)).collect(Collectors.toList()
 				);
 		return listaDTO;				
 	}
 	
 	
 	@RequestMapping(method=RequestMethod.GET, value="/{id}")
-	public ResponseEntity<AlunoEntity> buscar(@PathVariable Integer id){
-		AlunoEntity obj = service.buscar(id);		
-		return ResponseEntity.ok(obj);
+	public ResponseEntity<NecessidadeDetalheDTO> buscar(@PathVariable Integer id){
+		NecessidadeEntity obj = service.buscar(id);		
+		NecessidadeDetalheDTO objDTO = new NecessidadeDetalheDTO(obj);		
+		return ResponseEntity.ok(objDTO);
 	}	
 	
 	@RequestMapping(method=RequestMethod.POST)
-	public ResponseEntity<Void> salvar(@Valid @RequestBody AlunoDTO objDTO){
-	
-		AlunoEntity obj = new AlunoEntity(
+	public ResponseEntity<Void> salvar(@Valid @RequestBody NecessidadeDTO objDTO){
+		
+		NecessidadeEntity obj = new NecessidadeEntity(
 				null, 
-				objDTO.getNome(),
-				objDTO.getTelefone(),
-				objDTO.getMatricula(),
-				objDTO.getEmail()
+				objDTO.getDescricao()
 		);
 		
 		obj = service.salvar(obj);		
@@ -72,7 +71,7 @@ public class AlunoResource {
 	
 	
 	@RequestMapping(value="/paginacao",method=RequestMethod.GET)
-	public ResponseEntity<Page<AlunoDTO>> listarPaginas(
+	public ResponseEntity<Page<NecessidadeDTO>> listarPaginas(
 			@RequestParam(value="nome", defaultValue="") String nome, 
 			@RequestParam(value="pagina", defaultValue="0") Integer pagina, 
 			@RequestParam(value="qtd", defaultValue="15") Integer qtdLinhas, 
@@ -80,9 +79,9 @@ public class AlunoResource {
 			@RequestParam(value="dir", defaultValue="DESC") String dir
 		) 
 	{	
-		Page<AlunoEntity> listaEntity = service.buscar(nome, pagina, qtdLinhas, orderBy, dir);
+		Page<NecessidadeEntity> listaEntity = service.buscar(nome, pagina, qtdLinhas, orderBy, dir);
 		
-		Page<AlunoDTO> listaDTO = listaEntity.map(obj -> new AlunoDTO(obj));			
+		Page<NecessidadeDTO> listaDTO = listaEntity.map(obj -> new NecessidadeDTO(obj));			
 		
 		return ResponseEntity.ok().body(listaDTO);				
 	}

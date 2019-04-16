@@ -7,13 +7,12 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import com.nome.aula.entity.AlunoEntity;
-import com.nome.aula.entity.CursoEntity;
-import com.nome.aula.entity.AlunoEntity;
+import com.nome.aula.entity.NecessidadeEntity;
+import com.nome.aula.entity.ServidorEntity;
 
 @Repository
-public interface AlunoDAO extends JpaRepository<AlunoEntity, Integer> {
+public interface NecessidadeDAO extends JpaRepository<NecessidadeEntity, Integer> {
 	
-	@Query("SELECT obj FROM AlunoEntity obj WHERE obj.nome LIKE %:nome%")
-	Page<AlunoEntity> search(@Param("nome") String nome, Pageable pageable);
+	@Query("SELECT obj FROM NecessidadeEntity obj WHERE obj.descricao LIKE %:descricao%")
+	Page<NecessidadeEntity> search(@Param("descricao") String descricao, Pageable pageable);
 }

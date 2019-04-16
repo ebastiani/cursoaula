@@ -9,45 +9,34 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
-import com.nome.aula.dao.CursoDAO;
+import com.nome.aula.dao.NecessidadeDAO;
+import com.nome.aula.dao.ServidorDAO;
 import com.nome.aula.entity.CursoEntity;
+import com.nome.aula.entity.NecessidadeEntity;
 import com.nome.aula.exceptions.ObjNaoEncontradoException;
 
 @Service
-public class CursoService {
+public class NecessidadeService {
 	
 	@Autowired
-	private CursoDAO dao;
+	private NecessidadeDAO dao;
 	
-	public CursoEntity buscar(Integer id) {
-		Optional<CursoEntity> curso = dao.findById(id);
+	public NecessidadeEntity buscar(Integer id) {
+		Optional<NecessidadeEntity> curso = dao.findById(id);
 		return curso.orElseThrow(()-> new ObjNaoEncontradoException("Objeto não encontrado"));
 	}
 	
-	public List<CursoEntity> buscar(){
+	public List<NecessidadeEntity> buscar(){
 		 return dao.findAll();
 	}
 
-	public CursoEntity salvar(CursoEntity obj) {
+	public NecessidadeEntity salvar(NecessidadeEntity obj) {
 		obj.setId(null);
 		return dao.save(obj);
 	}
-
-	public CursoEntity atualizar(CursoEntity obj) {	
-		CursoEntity curso_banco = buscar(obj.getId());
-		if(obj.getNome()==null)
-			obj.setNome(curso_banco.getNome());
-		
-		if(obj.getNivel()==null)
-			obj.setNivel(curso_banco.getNivel());
-		
-		if(obj.getTurno()==null)
-			obj.setTurno(curso_banco.getTurno());
-		
-		return dao.save(obj);
-	}
 	
-	public Page<CursoEntity> buscarPorPagina(
+	public Page<NecessidadeEntity> buscar(
+			String nome,
 			Integer pagina, 
 			Integer qtdLinhas, 
 			String orderBy, 
@@ -58,12 +47,11 @@ public class CursoService {
 				Direction.valueOf(dir), 
 				orderBy);
 		
-		return dao.findAll(pageRequest);
+		return dao.search(nome, pageRequest);
 	}
-	
+
 	public void apagar(Integer id) {
 		dao.deleteById(id);		
 	}
-	
 	
 }

@@ -2,7 +2,8 @@ package com.nome.aula.DTO;
 
 import java.io.Serializable;
 
-import com.nome.aula.entity.CursoEntity;
+import javax.validation.constraints.Email;
+
 import com.nome.aula.entity.ServidorEntity;
 
 public class ServidorDTO implements Serializable{
@@ -11,7 +12,10 @@ public class ServidorDTO implements Serializable{
 	private Integer id;
 	
 	private String nome;
+	
+	@Email(message = "Email inválido")
 	private String email;
+	
 	private String senha;
 	
 	public ServidorDTO() {}

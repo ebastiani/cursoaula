@@ -26,7 +26,8 @@ public class ErroHandler {
 	public ResponseEntity<ErroResource> validation(
 			MethodArgumentNotValidException e, HttpServletRequest request)
 	{
-		ErroValidacao erros = new ErroValidacao(HttpStatus.BAD_REQUEST.value(), "Erro de validação");
+		ErroValidacao erros = new ErroValidacao(HttpStatus.BAD_REQUEST.value(), 
+				"Erro de validação");
 		
 		for(FieldError x: e.getBindingResult().getFieldErrors()) {
 			erros.addErro(x.getField(), x.getDefaultMessage());

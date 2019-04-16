@@ -18,8 +18,6 @@ public class MensagemErroCampoException implements Serializable{
 		this.msg = msg;
 	}
 
-
-
 	public String getCampo() {
 		return campo;
 	}
@@ -35,7 +33,6 @@ public class MensagemErroCampoException implements Serializable{
 	public void setMsg(String msg) {
 		this.msg = msg;
 	}
-	
 	
 
 }
