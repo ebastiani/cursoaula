@@ -18,6 +18,8 @@ public class ErroResource implements Serializable{
 		this.statusHttp = statusHttp;
 		this.mensagem = mensagem;
 	}
+	
+
 
 	public Integer getStatusHttp() {
 		return statusHttp;
@@ -34,6 +36,9 @@ public class ErroResource implements Serializable{
 	public void setMensagem(String mensagem) {
 		this.mensagem = mensagem;
 	}
+
+	
+	
 	
 }
 

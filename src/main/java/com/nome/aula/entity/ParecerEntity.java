@@ -11,6 +11,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 public class ParecerEntity implements Serializable{
 	private static final long serialVersionUID = 1L;
@@ -24,12 +27,15 @@ public class ParecerEntity implements Serializable{
 	
 	private String anexo;
 	
+	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
 	private Date data;
 	
+	@JsonManagedReference
 	@ManyToOne
 	@JoinColumn(name="servidor_id")
 	private ServidorEntity servidor;
 	
+	@JsonManagedReference
 	@ManyToOne
 	@JoinColumn(name="aluno_id")
 	private AlunoEntity aluno;

@@ -7,8 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.nome.aula.DTO.ServidorDTO;
 import com.nome.aula.dao.ServidorDAO;
 import com.nome.aula.entity.CursoEntity;
 import com.nome.aula.entity.ServidorEntity;
@@ -20,9 +22,11 @@ public class ServidorService {
 	@Autowired
 	private ServidorDAO dao;
 	
+
+	
 	public ServidorEntity buscar(Integer id) {
 		Optional<ServidorEntity> curso = dao.findById(id);
-		return curso.orElseThrow(()-> new ObjNaoEncontradoException("Objeto não encontrado"));
+		return curso.orElseThrow(()-> new ObjNaoEncontradoException("Objeto não encontrado. Tipo: Servidor"));
 	}
 	
 	public List<ServidorEntity> buscar(){
@@ -51,6 +55,10 @@ public class ServidorService {
 
 	public void apagar(Integer id) {
 		dao.deleteById(id);		
+	}
+
+	public ServidorEntity atualizar(ServidorEntity obj) {
+			return dao.save(obj);		
 	}
 	
 }

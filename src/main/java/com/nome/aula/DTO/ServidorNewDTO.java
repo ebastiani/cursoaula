@@ -8,7 +8,7 @@ import javax.validation.constraints.NotEmpty;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.nome.aula.entity.ServidorEntity;
 
-public class ServidorDTO implements Serializable{
+public class ServidorNewDTO implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	private Integer id;
@@ -18,10 +18,12 @@ public class ServidorDTO implements Serializable{
 	@Email(message = "Email inválido")
 	private String email;
 	
+	@NotEmpty
+	private String senha;
 	
-	public ServidorDTO() {}
+	public ServidorNewDTO() {}
 	
-	public ServidorDTO(ServidorEntity obj) {
+	public ServidorNewDTO(ServidorEntity obj) {
 		this.id = obj.getId();
 		this.nome = obj.getNome();
 		this.email = obj.getEmail();
@@ -53,7 +55,14 @@ public class ServidorDTO implements Serializable{
 		this.email = email;
 	}
 
-	
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
+
 	
 	
 	

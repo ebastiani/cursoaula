@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
@@ -13,6 +14,7 @@ import com.nome.aula.dao.AlunoDAO;
 import com.nome.aula.dao.ServidorDAO;
 import com.nome.aula.entity.CursoEntity;
 import com.nome.aula.entity.AlunoEntity;
+import com.nome.aula.exceptions.IntegridadeException;
 import com.nome.aula.exceptions.ObjNaoEncontradoException;
 
 @Service
@@ -51,7 +53,12 @@ public class AlunoService {
 	}
 
 	public void apagar(Integer id) {
-		dao.deleteById(id);		
+		try {		
+			dao.deleteById(id);	
+		}
+		catch (DataIntegrityViolationException e) {
+			 throw new IntegridadeException("Não é possível excluir");
+		}
 	}
 	
 }

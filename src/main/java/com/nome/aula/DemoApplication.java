@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import com.nome.aula.dao.AlunoDAO;
 import com.nome.aula.dao.CursoDAO;
@@ -20,6 +21,7 @@ import com.nome.aula.entity.NecessidadeEntity;
 import com.nome.aula.entity.ParecerEntity;
 import com.nome.aula.entity.ServidorEntity;
 import com.nome.aula.entity.TurmaEntity;
+import com.nome.aula.enums.Perfil;
 
 @SpringBootApplication
 public class DemoApplication implements CommandLineRunner{
@@ -43,6 +45,11 @@ public class DemoApplication implements CommandLineRunner{
 	
 	@Autowired
 	private ParecerDAO parecerDAO;
+	
+	
+	@Autowired
+	BCryptPasswordEncoder encoder;
+	
 
 
 	public static void main(String[] args) {
@@ -61,10 +68,9 @@ public class DemoApplication implements CommandLineRunner{
 		curso1.getTurmas().addAll(Arrays.asList(turma1, turma2));
 		curso2.getTurmas().addAll(Arrays.asList(turma3));
 		
-		ServidorEntity servidor = new ServidorEntity(null,  "Joao", "joao@gmail.com", "123");
+		ServidorEntity servidor = new ServidorEntity(null,  "Joao", "joao@gmail.com", encoder.encode("123"));
+		servidor.addPerfil(Perfil.ADMIN);
 		
-		
-		//16/04/2019
 		NecessidadeEntity necessidadeEntity = new NecessidadeEntity(null, "Deficiência intelectual");
 		
 		
@@ -77,15 +83,18 @@ public class DemoApplication implements CommandLineRunner{
 		SimpleDateFormat  data = new  SimpleDateFormat("dd/MM/yyyy HH:mm");
 		
 		ParecerEntity parecerEntity = new ParecerEntity(null, "okokook", "anexo", data.parse("16/04/2019 6:20"), servidor, alunoEntity);
+	
 		
-		//16/04/2019
 		cursoDAO.saveAll(Arrays.asList(curso1, curso2));	
 		turmaDAO.saveAll(Arrays.asList(turma1, turma2, turma3));	
 		
+		
 		necessidadeDAO.save(necessidadeEntity);
+		
 		alunoDAO.save(alunoEntity);
 		
 		servidorDAO.save(servidor);
+		
 		
 		parecerDAO.save(parecerEntity);
 		

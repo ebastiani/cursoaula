@@ -13,6 +13,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -44,6 +45,7 @@ public class AlunoEntity implements Serializable{
 	private List<NecessidadeEntity> necessidades = new ArrayList<>();
 	
 	
+	@JsonBackReference
 	@OneToMany(mappedBy="aluno")
 	private List<ParecerEntity> pareceres = new ArrayList<>();
 
@@ -110,6 +112,7 @@ public class AlunoEntity implements Serializable{
 	
 	
 
+	
 	public List<NecessidadeEntity> getNecessidades() {
 		return necessidades;
 	}

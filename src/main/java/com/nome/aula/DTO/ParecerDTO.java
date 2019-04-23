@@ -14,13 +14,20 @@ public class ParecerDTO implements Serializable{
 	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
 	private Date data;
 	
+	private String observacao; 
+	
+	private Integer servidor;
+	
+	private Integer aluno;
 		
 	public ParecerDTO() {}
 	
 	public ParecerDTO(ParecerEntity obj) {
 		this.id = obj.getId();
 		this.data = obj.getData();
-		
+		this.observacao = obj.getObservacao();
+		this.servidor = obj.getServidor().getId();
+		this.aluno = obj.getAluno().getId();
 	}
 
 	//getters e setters
@@ -39,6 +46,30 @@ public class ParecerDTO implements Serializable{
 
 	public void setData(Date data) {
 		this.data = data;
+	}
+
+	public String getObservacao() {
+		return observacao;
+	}
+
+	public void setObservacao(String observacao) {
+		this.observacao = observacao;
+	}
+
+	public Integer getServidor() {
+		return servidor;
+	}
+
+	public void setServidor(Integer servidor) {
+		this.servidor = servidor;
+	}
+
+	public Integer getAluno() {
+		return aluno;
+	}
+
+	public void setAluno(Integer aluno) {
+		this.aluno = aluno;
 	}
 
 	

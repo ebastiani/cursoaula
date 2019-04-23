@@ -35,5 +35,15 @@ public class ErroHandler {
 		
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(erros);
 	}
+	
+	@ExceptionHandler(IntegridadeException.class)
+	public ResponseEntity<ErroResource> erroIntegridade(
+			IntegridadeException e, HttpServletRequest request)
+	{
+		ErroResource erro = new ErroResource(HttpStatus.BAD_REQUEST.value(), e.getMessage());
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(erro);
+	}
+	
+	
 
 }

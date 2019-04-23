@@ -9,8 +9,12 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
+import com.nome.aula.dao.AlunoDAO;
 import com.nome.aula.dao.ParecerDAO;
+import com.nome.aula.dao.ServidorDAO;
+import com.nome.aula.entity.AlunoEntity;
 import com.nome.aula.entity.ParecerEntity;
+import com.nome.aula.entity.ServidorEntity;
 import com.nome.aula.exceptions.ObjNaoEncontradoException;
 
 @Service
@@ -18,6 +22,12 @@ public class ParecerService {
 	
 	@Autowired
 	private ParecerDAO dao;
+	
+	@Autowired
+	private ServidorService servidorService;
+	
+	@Autowired
+	private AlunoService alunoService;
 	
 	public ParecerEntity buscar(Integer id) {
 		Optional<ParecerEntity> curso = dao.findById(id);
@@ -30,6 +40,11 @@ public class ParecerService {
 
 	public ParecerEntity salvar(ParecerEntity obj) {
 		obj.setId(null);
+		
+		ServidorEntity servidor = servidorService.buscar(obj.getServidor().getId()); 
+		
+		AlunoEntity aluno = alunoService.buscar(obj.getAluno().getId()); 
+		
 		return dao.save(obj);
 	}
 	
