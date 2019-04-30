@@ -45,5 +45,13 @@ public class ErroHandler {
 	}
 	
 	
+	@ExceptionHandler(AutorizacaoException.class)
+	public ResponseEntity<ErroResource> authorization(
+			AutorizacaoException e, HttpServletRequest request)
+	{
+		ErroResource erro = new ErroResource(HttpStatus.FORBIDDEN.value(), e.getMessage());
+		return ResponseEntity.status(HttpStatus.FORBIDDEN).body(erro);
+	}
+	
 
 }

@@ -9,6 +9,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -43,6 +44,7 @@ public class ServidorResource {
 				);
 		return listaDTO;				
 	}	
+	
 	
 	@RequestMapping(method=RequestMethod.PUT, value="/{id}")
 	public ResponseEntity<Void> atualizar(@Valid @RequestBody ServidorDTO objDTO, @PathVariable Integer id){
@@ -82,6 +84,7 @@ public class ServidorResource {
 		return ResponseEntity.created(uri).build();
 	}
 	
+	@PreAuthorize("hasAnyRole('ADMIN')")
 	@RequestMapping(method=RequestMethod.DELETE, value="/{id}")
 	public ResponseEntity<Void> delete (@PathVariable Integer id){
 		service.apagar(id);

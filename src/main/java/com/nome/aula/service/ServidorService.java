@@ -14,7 +14,10 @@ import com.nome.aula.DTO.ServidorDTO;
 import com.nome.aula.dao.ServidorDAO;
 import com.nome.aula.entity.CursoEntity;
 import com.nome.aula.entity.ServidorEntity;
+import com.nome.aula.enums.Perfil;
+import com.nome.aula.exceptions.AutorizacaoException;
 import com.nome.aula.exceptions.ObjNaoEncontradoException;
+import com.nome.aula.security.UsuarioSpringSecurity;
 
 @Service
 public class ServidorService {
@@ -25,8 +28,12 @@ public class ServidorService {
 
 	
 	public ServidorEntity buscar(Integer id) {
-		Optional<ServidorEntity> curso = dao.findById(id);
-		return curso.orElseThrow(()-> new ObjNaoEncontradoException("Objeto não encontrado. Tipo: Servidor"));
+		UsuarioSpringSecurity usuarioLogado = UserService.autenticado();
+		if(usuarioLogado!=null || !usuarioLogado.eAdmin(Perfil.ADMIN) && ! id.equals(usuarioLogado.getId()))
+			throw new AutorizacaoException("não autorizado");
+		
+		Optional<ServidorEntity> obj = dao.findById(id);
+		return obj.orElseThrow(()-> new ObjNaoEncontradoException("Objeto não encontrado. Tipo: Servidor"));
 	}
 	
 	public List<ServidorEntity> buscar(){
