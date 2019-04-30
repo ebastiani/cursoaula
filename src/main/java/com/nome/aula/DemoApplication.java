@@ -71,6 +71,10 @@ public class DemoApplication implements CommandLineRunner{
 		ServidorEntity servidor = new ServidorEntity(null,  "Joao", "joao@gmail.com", encoder.encode("123"));
 		servidor.addPerfil(Perfil.ADMIN);
 		
+		
+		ServidorEntity servidor2 = new ServidorEntity(null,  "maria", "maria@gmail.com", encoder.encode("123"));
+	
+		
 		NecessidadeEntity necessidadeEntity = new NecessidadeEntity(null, "Deficiência intelectual");
 		
 		
@@ -94,6 +98,7 @@ public class DemoApplication implements CommandLineRunner{
 		alunoDAO.save(alunoEntity);
 		
 		servidorDAO.save(servidor);
+		servidorDAO.save(servidor2);
 		
 		
 		parecerDAO.save(parecerEntity);

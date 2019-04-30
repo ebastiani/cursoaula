@@ -46,7 +46,7 @@ public class ServidorEntity implements Serializable {
 		
 	
 	public ServidorEntity() {
-		addPerfil(Perfil.CLIENTE);
+		addPerfil(Perfil.COMUM);
 		
 	}
 
@@ -56,7 +56,7 @@ public class ServidorEntity implements Serializable {
 		this.nome = nome;
 		this.email = email;
 		this.senha = senha;
-		addPerfil(Perfil.CLIENTE);
+		addPerfil(Perfil.COMUM);
 	}
 		
 
@@ -111,8 +111,7 @@ public class ServidorEntity implements Serializable {
 	public void addPerfil(Perfil perfil) {
 		perfis.add(perfil.getCod());
 	}
-	
-	
+		
 
 	public void setPerfis(Set<Integer> perfis) {
 		this.perfis = perfis;

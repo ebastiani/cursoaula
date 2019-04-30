@@ -52,8 +52,7 @@ public class ParecerResource {
 		ServidorEntity servidor = new ServidorEntity();
 		AlunoEntity aluno = new AlunoEntity();		
 		servidor.setId(objDTO.getServidor());		
-		aluno.setId(objDTO.getAluno());
-		
+		aluno.setId(objDTO.getAluno());		
 		
 		ParecerEntity obj = new ParecerEntity(null, objDTO.getObservacao(), null, objDTO.getData(), servidor, aluno);
 	

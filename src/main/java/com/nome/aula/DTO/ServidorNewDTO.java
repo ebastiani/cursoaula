@@ -27,6 +27,7 @@ public class ServidorNewDTO implements Serializable{
 		this.id = obj.getId();
 		this.nome = obj.getNome();
 		this.email = obj.getEmail();
+		this.senha = obj.getSenha();
 	}
 
 	//getters e setters

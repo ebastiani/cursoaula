@@ -14,4 +14,6 @@ public interface ServidorDAO extends JpaRepository<ServidorEntity, Integer> {
 	
 	@Query("SELECT obj FROM ServidorEntity obj WHERE obj.nome LIKE %:nome%")
 	Page<ServidorEntity> search(@Param("nome") String nome, Pageable pageable);
+	
+	ServidorEntity findByEmail(String email);
 }

@@ -3,8 +3,7 @@ package com.nome.aula.enums;
 public enum Perfil {
 
 	ADMIN(1, "ROLE_ADMIN"),
-	CLIENTE(2, "ROLE_CLIENTE");
-	
+	COMUM(2, "ROLE_COMUM");
 	
 	private int cod;
 	private String descricao;
