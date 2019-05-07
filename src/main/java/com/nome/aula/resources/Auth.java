@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.nome.aula.config.JWTUtil;
+import com.nome.aula.security.JWTUtil;
 import com.nome.aula.security.UsuarioSpringSecurity;
 import com.nome.aula.service.UserService;
 

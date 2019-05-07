@@ -9,7 +9,7 @@
 		<version>2.2.0.BUILD-SNAPSHOT</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
-	
+
 	<groupId>com.nome.aula</groupId>
 	<artifactId>aula</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
@@ -46,16 +46,26 @@
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 		</dependency>
-		
+
 		<dependency>
 			<groupId> org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
-		
+
 		<dependency>
-		    <groupId>io.jsonwebtoken</groupId>
-		    <artifactId>jjwt</artifactId>
-		    <version>0.7.0</version>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt</artifactId>
+			<version>0.7.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-mail</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-thymeleaf</artifactId>
 		</dependency>
 
 	</dependencies>

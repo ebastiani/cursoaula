@@ -12,6 +12,8 @@ import com.nome.aula.enums.Perfil;
 
 public class UsuarioSpringSecurity implements UserDetails {
 
+	//Usuário específico do Spring Security
+	
 	private static final long serialVersionUID = 1L;
 	private Integer id;
 	private String email;

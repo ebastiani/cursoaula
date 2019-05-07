@@ -1,4 +1,4 @@
-package com.nome.aula.config;
+package com.nome.aula.security;
 
 import java.util.Date;
 
@@ -19,7 +19,7 @@ public class JWTUtil {
 	@Value("${jwt.expiration}")
 	private Long expiration;
 	
-	
+	//gera o token a partir do email.
 	public String generateToken(String username) {
 		return Jwts.builder()
 				.setSubject(username)

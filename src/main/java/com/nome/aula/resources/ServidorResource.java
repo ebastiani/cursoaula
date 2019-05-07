@@ -4,6 +4,7 @@ import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.mail.SendFailedException;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,11 +20,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.nome.aula.DTO.CursoDTO;
 import com.nome.aula.DTO.ServidorDTO;
 import com.nome.aula.DTO.ServidorNewDTO;
-import com.nome.aula.entity.CursoEntity;
 import com.nome.aula.entity.ServidorEntity;
+import com.nome.aula.service.EmailService;
 import com.nome.aula.service.ServidorService;
 
 @RestController
@@ -32,6 +32,9 @@ public class ServidorResource {
 	
 	@Autowired
 	ServidorService service;
+	
+	@Autowired
+	EmailService email;
 	
 	@Autowired
 	BCryptPasswordEncoder encoder;
@@ -63,8 +66,8 @@ public class ServidorResource {
 	
 	@RequestMapping(method=RequestMethod.GET, value="/{id}")
 	public ResponseEntity<ServidorEntity> buscar(@PathVariable Integer id){
-		ServidorEntity curso = service.buscar(id);		
-		return ResponseEntity.ok(curso);
+		ServidorEntity ojb = service.buscar(id);		
+		return ResponseEntity.ok(ojb);
 	}	
 	
 	@RequestMapping(method=RequestMethod.POST)
@@ -77,11 +80,21 @@ public class ServidorResource {
 				encoder.encode(objDTO.getSenha())
 		);
 		
-		obj = service.salvar(obj);		
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
-				.path("/{id}").buildAndExpand(obj.getId()).toUri();
+		//obj = service.salvar(obj);	
+		try {
+			if(obj!=null) {
+				email.enviarEmailHtml(obj);
+			}
+			URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
+					.path("/{id}").buildAndExpand(obj.getId()).toUri();
+			
+			return ResponseEntity.created(uri).build();
+		}
+		catch (Exception  e) {
+			System.out.println(e.getMessage());
+			return null;
+		}
 		
-		return ResponseEntity.created(uri).build();
 	}
 	
 	@PreAuthorize("hasAnyRole('ADMIN')")

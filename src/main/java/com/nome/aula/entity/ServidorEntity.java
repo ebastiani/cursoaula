@@ -1,7 +1,9 @@
 package com.nome.aula.entity;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -140,6 +142,30 @@ public class ServidorEntity implements Serializable {
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		
+		
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+		
+	
+		StringBuilder builder = new StringBuilder();
+		builder.append("Cadastro de servidor:");
+		builder.append("Nome: ");
+		builder.append(nome);
+		builder.append(", Email: ");
+		builder.append(email);
+		builder.append(", Perfis:");
+		
+		for(Perfil p: getPerfis()) {
+			builder.append(p);
+		}
+		
+		builder.append(", data: ");
+		builder.append(dateFormat.format(new Date()));
+		return builder.toString();
 	}
 
 	

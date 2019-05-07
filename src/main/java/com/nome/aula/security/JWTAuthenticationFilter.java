@@ -1,4 +1,4 @@
-package com.nome.aula.config;
+package com.nome.aula.security;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -18,11 +18,11 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nome.aula.DTO.CredenciaisDTO;
-import com.nome.aula.security.UsuarioSpringSecurity;
 
 public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 	
 	private AuthenticationManager authenticationManager;    
+	
     private JWTUtil jwtUtil;
     
     public JWTAuthenticationFilter(AuthenticationManager authenticationManager, JWTUtil jwtUtil) {
@@ -38,6 +38,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 		try {
 			CredenciaisDTO creds = new ObjectMapper().readValue(req.getInputStream(), CredenciaisDTO.class);
 	
+			//Spring Security, não do jwt
 	        UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(creds.getEmail(), creds.getSenha(), new ArrayList<>());
 	        
 	        Authentication auth = authenticationManager.authenticate(authToken);
@@ -70,7 +71,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
             response.getWriter().append(json());
         }
         
-        private String json() {
+       private String json() {
             long date = new Date().getTime();
             return "{\"timestamp\": " + date + ", "
                 + "\"status\": 401, "

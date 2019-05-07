@@ -12,6 +12,8 @@ import com.nome.aula.security.UsuarioSpringSecurity;
 
 @Service
 public class UsuarioSpringSecurityService implements UserDetailsService{
+	
+	//Service que implementa o user específico do Spring Security
 
 	@Autowired
 	private ServidorDAO dao;

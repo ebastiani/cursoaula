@@ -1,4 +1,4 @@
-package com.nome.aula.config;
+package com.nome.aula.security;
 
 import java.io.IOException;
 

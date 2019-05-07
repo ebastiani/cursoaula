@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:remove="all">Novo cadastro</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<div>
+		<h1>
+			Nome: <span th:text="${servidor.id}"> </span>
+		</h1>
+		<h1>
+			Email: <span th:text="${servidor.email}"> </span>
+		</h1>
+		<p>
+			Cadastrado em: <span
+				th:text="${#dates.format(#dates.createNow(), 'dd/MM/yyyy hh:mm')}"></span>
+		</p>
+
+	</div>
+</body>
+</html>

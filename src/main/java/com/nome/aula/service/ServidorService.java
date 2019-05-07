@@ -29,8 +29,8 @@ public class ServidorService {
 	
 	public ServidorEntity buscar(Integer id) {
 		UsuarioSpringSecurity usuarioLogado = UserService.autenticado();
-		if(usuarioLogado!=null || !usuarioLogado.eAdmin(Perfil.ADMIN) && ! id.equals(usuarioLogado.getId()))
-			throw new AutorizacaoException("não autorizado");
+		//if(usuarioLogado!=null || !usuarioLogado.eAdmin(Perfil.ADMIN) && ! id.equals(usuarioLogado.getId()))
+			//throw new AutorizacaoException("não autorizado");
 		
 		Optional<ServidorEntity> obj = dao.findById(id);
 		return obj.orElseThrow(()-> new ObjNaoEncontradoException("Objeto não encontrado. Tipo: Servidor"));
@@ -41,7 +41,7 @@ public class ServidorService {
 	}
 
 	public ServidorEntity salvar(ServidorEntity obj) {
-		obj.setId(null);
+		obj.setId(null);	
 		return dao.save(obj);
 	}
 	
