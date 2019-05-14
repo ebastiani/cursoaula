@@ -1,5 +1,6 @@
 package com.nome.aula.service;
 
+import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
@@ -9,6 +10,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.nome.aula.DTO.ServidorDTO;
 import com.nome.aula.dao.ServidorDAO;
@@ -25,7 +27,8 @@ public class ServidorService {
 	@Autowired
 	private ServidorDAO dao;
 	
-
+	@Autowired
+	private S3Service s3Service;
 	
 	public ServidorEntity buscar(Integer id) {
 		UsuarioSpringSecurity usuarioLogado = UserService.autenticado();
@@ -66,6 +69,11 @@ public class ServidorService {
 
 	public ServidorEntity atualizar(ServidorEntity obj) {
 			return dao.save(obj);		
+	}
+	
+	
+	public URI uploadArquivo(MultipartFile file) {
+		return s3Service.uploadFile(file);
 	}
 	
 }

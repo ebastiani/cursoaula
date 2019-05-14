@@ -1,5 +1,6 @@
 package com.nome.aula.service;
 
+import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
@@ -8,6 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.nome.aula.dao.AlunoDAO;
 import com.nome.aula.dao.ParecerDAO;
@@ -29,6 +31,7 @@ public class ParecerService {
 	@Autowired
 	private AlunoService alunoService;
 	
+		
 	public ParecerEntity buscar(Integer id) {
 		Optional<ParecerEntity> curso = dao.findById(id);
 		return curso.orElseThrow(()-> new ObjNaoEncontradoException("Objeto não encontrado"));
@@ -66,5 +69,7 @@ public class ParecerService {
 	public void apagar(Integer id) {
 		dao.deleteById(id);		
 	}
+	
+	
 	
 }

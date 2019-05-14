@@ -38,6 +38,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 			"/cursos/**",
 			"/servidores/**",
 			"/auth/**"
+			
 		
 			
 	};

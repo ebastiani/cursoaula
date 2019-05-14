@@ -16,11 +16,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.nome.aula.DTO.ParecerDTO;
-import com.nome.aula.DTO.ServidorDTO;
 import com.nome.aula.entity.AlunoEntity;
 import com.nome.aula.entity.ParecerEntity;
 import com.nome.aula.entity.ServidorEntity;
-import com.nome.aula.service.AlunoService;
 import com.nome.aula.service.ParecerService;
 
 @RestController
@@ -64,4 +62,8 @@ public class ParecerResource {
 		return ResponseEntity.created(uri).build();
 		
 	};
+	
+
+	
+	
 }
