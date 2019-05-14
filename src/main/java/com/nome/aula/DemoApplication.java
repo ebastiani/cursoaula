@@ -68,7 +68,7 @@ public class DemoApplication implements CommandLineRunner{
 		curso1.getTurmas().addAll(Arrays.asList(turma1, turma2));
 		curso2.getTurmas().addAll(Arrays.asList(turma3));
 		
-		ServidorEntity servidor = new ServidorEntity(null,  "Joao", "joao@gmail.com", encoder.encode("123"));
+		ServidorEntity servidor = new ServidorEntity(null,  "Joao", "ederson.bastiani@iffarroupilha.edu.br", encoder.encode("123"));
 		servidor.addPerfil(Perfil.ADMIN);
 		
 		

@@ -70,6 +70,23 @@ public class EmailService {
 	}
 	
 	
+	public void enviarSenha(ServidorEntity obj, String senha) {
+		
+		SimpleMailMessage message = new SimpleMailMessage();
+		
+		message.setTo(obj.getEmail());
+		message.setFrom(rementente);
+		message.setSubject("Nova senha");
+		message.setText("Nova senha: " + senha);		
+		
+		System.out.println(message.toString());
+		
+		mailSender.send(message);
+		
+		
+	}
+	
+	
 	//https://accounts.google.com/b/0/DisplayUnlockCaptcha
 	//https://myaccount.google.com/lesssecureapps
 

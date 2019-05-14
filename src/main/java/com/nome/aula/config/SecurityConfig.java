@@ -36,12 +36,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	
 	private static final String[] CAMINHOS_PUBLICOS_GET = {
 			"/cursos/**",
-			"/servidores/**"
+			"/servidores/**",
+			"/auth/**"
+		
 			
 	};
 		
 	private static final String[] CAMINHOS_PUBLICOS_POST = {
-			"/servidores/**"
+			"/servidores/**",
+			"/auth/**"
 			
 	};
 
